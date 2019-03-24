@@ -40,7 +40,6 @@ router.beforeEach((to, from, next) => {
   console.log(to)
   console.log(from)
   let isMob = /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent);
-
   if (isMob&&(!from.name ||from.name=='index'||from.name=='live')&&to.name!='mindex'&&to.name!='mlive') {
     next('/mindex')
   } else if (!isMob&&to.name!='index'&&to.name!='live') {

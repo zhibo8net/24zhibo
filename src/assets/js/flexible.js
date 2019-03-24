@@ -85,6 +85,7 @@
         var rem = width / 24.84;
         docEl.style.fontSize = rem + 'px';
         flexible.rem = win.rem = rem;
+        
     }
 
     win.addEventListener('resize', function() {
