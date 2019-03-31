@@ -10,31 +10,46 @@
         <a href="index.html" class="back"></a>
         <div class="infoWrap">
           <div class="list1">
-            <img src="http://47.75.166.143:8080/file/picture/back/3cf1f864e24e0d4a94697966836c7629.jpg"
+            <img :src="configData.baseUrl+matchDeatil.masterTeamLink"
               class="first homeTeam_img">
-            <span class="name1 homeTeam">中国男足U19</span>
+            <span class="name1 homeTeam">{{matchDeatil.masterTeamName}}</span>
           </div>
           <div class="list2">
-            <p class="gameName matchTitle">足球友谊赛</p>
-            <p class="gameTime matchTime_pc">03-25 16:00</p>
+            <p class="gameName matchTitle">{{matchDeatil.game}}</p>
+            <p class="gameTime matchTime_pc">{{matchDeatil.playDateStr}}</p>
           </div>
           <div class="list3">
-            <img src="http://47.75.166.143:8080/file/picture/back/331f6650bccbba61da24470a54aeb91b.jpg"
-              class="second visitingTeam_img">
-            <span class="name2 visitingTeam">缅甸U19</span>
+            <img :src="configData.baseUrl+matchDeatil.guestTeamLink" class="second visitingTeam_img">
+            <span class="name2 visitingTeam">{{matchDeatil.guestTeamName}}</span>
           </div>
         </div>
       </div>
       <div class="info2">
-        <div class="liveshow"> <a href="https://mp.weixin.qq.com/s/CIIPRUxkFpKl9gQS01ldBQ" target="_blank"
-            class="toLive">球迷群</a><a href="http://www.yabet1567.com/" target="_blank" class="toLive">安全购彩</a></div>
+        <div class="liveshow">
+          <a v-for="(item,i) in bannerList" :key="i" :href="item.link" target="_blank" v-if="item.adKey=='LIVE-TOP'"
+            class="toLive">{{item.message}}</a>
+            <!-- <a href="http://www.yabet1567.com/" target="_blank" class="toLive">安全购彩</a> -->
+            </div>
       </div>
       <div class="liveCotainer">
         <div class="guangg" style="display: none;">
           <div class="timeOff">10 秒钟后自动关闭 x</div>
         </div>
-        <div id="video">
-
+        <div id="video" class="video">
+          <div class="ckplayerchcibnbibhcozinnmu" style="background-color: rgb(0, 0, 0); width: 100%; height: 100%;"><object
+                pluginspage="http://www.macromedia.com/go/getflashplayer" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=11,3,0,0" width="100%"
+                height="100%" id="chzwhoybbhsxakofwl" name="chzwhoybbhsxakofwl" align="middle">
+                <param name="allowScriptAccess" value="always">
+                <param name="allowFullScreen" value="true">
+                <param name="quality" value="high">
+                <param name="bgcolor" value="#000">
+                <param name="movie" value="https://douyuplayer.gz.bcebos.com/ckplayer/ckplayer.swf">
+                <param name="flashvars" value="variable=player&amp;volume=0.8&amp;autoplay=1&amp;live=1&amp;video=http%3A%2F%2Fpull.stager.jp.8686c.com%2Fstager%2F822427%2Fplaylist.m3u8&amp;playbackrate=1&amp;width=16&amp;height=9"><embed
+                    allowscriptaccess="always" allowfullscreen="true" quality="high" bgcolor="#000" src="https://douyuplayer.gz.bcebos.com/ckplayer/ckplayer.swf"
+                    flashvars="variable=player&amp;volume=0.8&amp;autoplay=1&amp;live=1&amp;video=http%3A%2F%2Fpull.stager.jp.8686c.com%2Fstager%2F822427%2Fplaylist.m3u8&amp;playbackrate=1&amp;width=16&amp;height=9"
+                    width="100%" height="100%" id="chzwhoybbhsxakofwl" name="chzwhoybbhsxakofwl" align="middle" type="application/x-shockwave-flash"
+                    pluginspage="http://www.macromedia.com/go/getflashplayer"></object></div>
         </div>
       </div>
       <!---->
@@ -60,13 +75,51 @@
     },
     data() {
       return {
-
+        matchID:'',
+        matchDeatil:{},
+        bannerList:[]
       }
+    },
+    methods:{
+      init(){
+        this.api.getBanner().then((resp)=>{
+        if(resp.status == 200){
+          this.bannerList = resp.data;
+          console.log(this.matchDeatil.lives[0].link)
+          var videoObject = {
+            container: '#video', //“#”代表容器的ID，“.”或“”代表容器的class
+            variable: 'player', //该属性必需设置，值等于下面的new chplayer()的对象
+            autoplay: true, //自动播放
+            live: true,
+            width: 16,
+            height: 9,
+            video: this.matchDeatil.lives[0].link //视频地址
+        };
+        var player = new ckplayer(videoObject);
+        }
+      })
+      .catch((er)=>{
+        console.log(er)
+      })
+      }
+    },
+    mounted(){
+      this.matchID = this.$route.query.matchID;
+      this.api.getMatchDetail({id:this.matchID}).then((resp)=>{
+        console.log(resp.data)
+        if(resp.status == 200){
+          this.matchDeatil = resp.data;
+
+        }
+      })
+      .catch((er)=>{
+        console.log(er)
+      })
+      this.init();
     }
   }
 
 </script>
 <style lang="css">
   @import url('../assets/css/index');
-
 </style>

@@ -5,11 +5,15 @@ import App from './App';
 import router from './router';
 // import el_module from 'element-ui'
 import el_module from './el_module';
-import mactchData from './assets/data';
+import configData from './config/configData';
+import api from './api/index'
+import './assets/js/ckplayer';
+console.log(ckplayer)
 
 Vue.config.productionTip = false;
 
-Vue.prototype.mactchData = mactchData;
+Vue.prototype.configData = configData;
+Vue.prototype.api = api;
 
 // css样式还是需要全部引入
 import 'element-ui/lib/theme-chalk/index.css';
