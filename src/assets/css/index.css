@@ -116,7 +116,7 @@
 }
 
 .subnav_box .nav_content .logo {
-  background: url("../img/80logo.jpg") 50% no-repeat;
+  background: url("../img/logo.png") 50% no-repeat;
   background-size: 100%;
   width: 233px;
   height: 80px
@@ -455,6 +455,12 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis
+}
+
+
+
+.mobBanner .el-carousel__container{
+  height: 8rem !important
 }
 
 a,

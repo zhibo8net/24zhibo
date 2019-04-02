@@ -7,7 +7,6 @@ import router from './router';
 import el_module from './el_module';
 import configData from './config/configData';
 import api from './api/index'
-import './assets/js/ckplayer';
 console.log(ckplayer)
 
 Vue.config.productionTip = false;

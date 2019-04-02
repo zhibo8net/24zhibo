@@ -13,7 +13,7 @@ import {
 } from 'element-ui'
 const element = {
   install: function (Vue) {
-    Vue.use(Message)
+    // Vue.use(Message)
     Vue.use(Carousel)
     Vue.use(CarouselItem)
     Vue.use(Table)

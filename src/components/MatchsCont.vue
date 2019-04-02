@@ -41,8 +41,7 @@
                 </el-table-column>
                 <el-table-column width="120" align='center'>
                   <template slot-scope="scope">
-                    <button type="button" @click="goLive(scope.row.id)"
-                      class="el-button el-button--text"><span>视频直播</span></button>
+                    <button type="button" @click="goLive(scope.row.id)" class="el-button el-button--text"><span>视频直播</span></button>
                   </template>
                 </el-table-column>
               </el-table-column>
@@ -86,12 +85,13 @@
             this.$emit('changeMatchList',this.nameList[index].name)
         },
       goLive(id) {
-        this.$router.push({
-          path: '/live',
+        const {href} = this.$router.resolve({
+          name: 'live',
           query: {
             matchID: id
           }
         })
+        window.open(href, '_blank')
       }
     },
     filters:{

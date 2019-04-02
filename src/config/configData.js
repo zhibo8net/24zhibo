@@ -1,6 +1,10 @@
 const configData = {
   nameList: [
     {
+      id: '99999',
+      name: '全部'
+    },
+    {
       id: ['0', '1'],
       name: 'NBA'
     },
