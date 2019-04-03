@@ -27,9 +27,7 @@ Vue.use(el_module);
         navigator.userAgent
       );
       if (isMob) {
-        router.push('/mindex');
-      } else {
-        router.push('/');
+        window.location.reload()
       }
     },
     false

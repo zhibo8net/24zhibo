@@ -23,7 +23,7 @@ const router = new Router({
       path: '/mindex',
       name: 'mindex',
       component: mindex
-    },{
+    }, {
       path: '/mlive',
       name: 'mlive',
       component: mlive
@@ -39,11 +39,26 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   console.log(to)
   console.log(from)
+  // debugger
   let isMob = /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent);
-  if (isMob&&(!from.name ||from.name=='index'||from.name=='live')&&to.name!='mindex'&&to.name!='mlive') {
-    next('/mindex')
-  } else if (!isMob&&to.name!='index'&&to.name!='live') {
-    next('/index')
+  if (isMob && to.name == 'live') {
+    next({
+      path: '/mlive',
+      query: to.query
+    })
+  } else if (isMob && to.name == 'index') {
+    next({
+      path: '/mindex'
+    })
+  } else if (!isMob && to.name == 'mindex') {
+    next({
+      path: '/index'
+    })
+  } else if (!isMob && to.name == 'mlive') {
+    next({
+      path: '/live',
+      query: to.query
+    })
   } else {
     next();
   }
