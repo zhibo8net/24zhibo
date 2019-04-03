@@ -4,21 +4,21 @@
       <headerCon :isIndex='2'></headerCon>
     </div>
     <div data-v-3073f131="" class="line"></div>
-    <div data-v-3073f131="" class="today">
+    <div data-v-3073f131="" class="today" v-if="matchDeatil.masterTeamName">
       <div data-v-3073f131="" class="vs-wrap clearfix">
-        <div data-v-3073f131="" class="vs"><img data-v-3073f131=""
-            src="http://47.75.166.143:8080/file/picture/back/245e350b1b5f65d605c824da7c484242.jpg"
+        <div data-v-3073f131="" class="vs">
+          <img data-v-3073f131=""   :src="configData.baseUrl+matchDeatil.masterTeamLink"
             class="gameLogo1 homeTeam_img">
-          <p data-v-3073f131="" class="onePlayer homeTeam">快船</p>
+          <p data-v-3073f131="" class="onePlayer homeTeam">{{matchDeatil.masterTeamName}}</p>
         </div>
         <div data-v-3073f131="" class="vs">
-          <p data-v-3073f131="" class="name1 matchTime_wap">NBA常规赛</p>
-          <p data-v-3073f131="" class="time1 matchTitle" style="margin-top: 40px;">03-25 | 00:00</p>
+          <p data-v-3073f131="" class="name1 matchTime_wap">{{matchDeatil.game}}{{!matchDeatil.rotation?"":matchDeatil.rotation}}</p>
+          <p data-v-3073f131="" class="time1 matchTitle" style="margin-top: 40px;">{{matchDeatil.playDateStr}}</p>
         </div>
         <div data-v-3073f131="" class="vs"><img data-v-3073f131=""
-            src="http://47.75.166.143:8080/file/picture/back/5ceff9d4a60d6b6085d5e5ee74d82265.jpg"
+            :src="configData.baseUrl+matchDeatil.guestTeamLink"
             class="gameLogo2 visitingTeam_img">
-          尼克斯
+          {{matchDeatil.guestTeamName}}
         </div>
       </div>
     </div>
@@ -48,6 +48,8 @@
 
       <div data-v-3073f131="" class="info2">
         <div data-v-3073f131=""  class="liveshow">
+          <a v-for="(item,i) in matchDeatil.lives" :key="i" href="javascript:;" v-if="matchDeatil.lives&&matchDeatil.lives.length>0"
+            class="toLive" :class="{'picked':matchDeatil.lives.length==1}">信号{{i+1}}</a>
           <a data-v-3073f131="" v-for="(item,i) in bannerList" :key="i" :href="item.link" target="_blank" v-if="item.adKey=='LIVE-TOP'"
             class="toLive">{{item.message}}</a>
           <!-- <a data-v-3073f131="" href="javascript:" class="toLive picked">公众号：JRS直播吧</a>
@@ -75,7 +77,8 @@
         bannerList:[],
         isMob:!0,
         matchID:'',
-        videoSrc:''
+        videoSrc:'',
+        matchDeatil:{}
       }
     },
     created() {

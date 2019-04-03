@@ -26,6 +26,8 @@
       </div>
       <div class="info2">
         <div class="liveshow">
+          <a v-for="(item,i) in matchDeatil.lives" :key="i" href="javascript:;" v-if="matchDeatil.lives&&matchDeatil.lives.length>0"
+            class="toLive" :class="{'picked':matchDeatil.lives.length==1}">信号{{i+1}}</a>
           <a v-for="(item,i) in bannerList" :key="i" :href="item.link" target="_blank" v-if="item.adKey=='LIVE-TOP'"
             class="toLive">{{item.message}}</a>
             <!-- <a href="http://www.yabet1567.com/" target="_blank" class="toLive">安全购彩</a> -->
