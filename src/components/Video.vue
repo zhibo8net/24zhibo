@@ -20,7 +20,7 @@
                     width="100%" height="100%" id="chzwhoybbhsxakofwl" name="chzwhoybbhsxakofwl" align="middle" type="application/x-shockwave-flash"
                     pluginspage="http://www.macromedia.com/go/getflashplayer">
                 </object> -->
-                <video v-if="isMob" id="chffxprftxrxnebrer" :src="videoSrc" width="100%" height="100%" autoplay="autoplay" controls="controls" x5-playsinline="" playsinline="" webkit-playsinline="true" style="width: 100%; height: 100%; background-color: rgb(0, 0, 0);"></video>
+                <video v-if="isMob" id="chffxprftxrxnebrer" :src="videoSrc" width="100%" height="100%" autoplay="autoplay" controls="controls" x5-playsinline="" playsinline="true" webkit-playsinline="true" style="width: 100%; height: 100%; background-color: rgb(0, 0, 0);"></video>
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@ export default {
                 width: 16,
                 height: 9,
                 // video: this.videoSrc //视频地址
-                video:'http://liveplay.oadql.cn/live/streamcnhd6898.m3u8'
+                video:'http://liveplay.oadql.cn/live/stream2235381.m3u8'
             };
             var player = new ckplayer(videoObject);
         }
