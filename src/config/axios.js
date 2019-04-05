@@ -36,7 +36,7 @@ function errorState(error) {
 function fetch(options, showLoading = 0, noloading = 0) {
   return new Promise((resolve, reject) => {
     let instance = axios.create({
-      // baseURL: 'https://shop.lishili.com.cn/',
+      baseURL: 'http://80zhibo.com/',
       responseType: 'json',
       // withCredentials: true,
       timeout: 10000,
