@@ -1,14 +1,16 @@
 <template>
-  <div class="index">
+  <div class="index" v-loading="loading">
     <div class="m_nav">
       <headerCon :isIndex='2'></headerCon>
     </div>
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane v-for="(item,i) in configData.nameList" :key="i" :label="item.name" :name="String(i)">
-        <div class="contentList mcontentList" v-for="(matchs,index) in macthList" :key="index"
+      </el-tab-pane>
+    </el-tabs>
+    <div class="contentList mcontentList" v-for="(matchs,index) in macthList" :key="index"
           v-if="matchs.matches.length>0">
           <div class="contentTop">{{matchs.dateStr}}</div>
-          <router-link tag="div" class="contentBody" v-for="(match,ids) in matchs.matches" :key="ids" v-if="match.game.indexOf(item.name)>-1||item.id=='99999'" :to="{path:'/mlive',query:{'matchID':match.id}}">
+          <router-link tag="div" class="contentBody" v-for="(match,ids) in matchs.matches" :key="ids" :to="{path:'/mlive',query:{'matchID':match.id}}">
             <div class="contentLeft">
               <p><img :src="configData.baseUrl+match.masterTeamLink" alt=""></p>
               <p>{{match.masterTeamName}}</p>
@@ -23,8 +25,6 @@
             </div>
           </router-link>
         </div>
-      </el-tab-pane>
-    </el-tabs>
     <!-- <matchsCon></matchsCon>
     <footerCon :isIndex="1"></footerCon> -->
   </div>
@@ -42,7 +42,8 @@
       return {
         activeName: '0',
         macthList:[],
-        nameList:[]
+        nameList:[],
+        loading:false
       }
     },
     mounted() {
@@ -50,15 +51,23 @@
       this.getMatch();
     },
     methods: {
-      handleClick() {
-
+      handleClick(data) {
+        let name = ''
+        if(data.index!='0'){
+          name = data.label;
+        }
+        this.getMatch(name);
+        this.loading = !0;
       },
-      getMatch(type){
-        this.nowType = type;
-        this.api.getMatchList().then((resp)=>{
+      getMatch(name){
+        this.macthList = [];
+        this.api.getMatchList({
+          game:name
+        }).then((resp)=>{
         if(resp.status == 200){
           // this.deleteAllChoose = true;
           this.macthList = resp.data;
+          this.loading =false;
           // this.bakListData = JSON.stringify(resp.data);
           // this.$nextTick(()=>{
           //   this.deleteAllChoose = false;
@@ -76,5 +85,5 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-    @import url('../assets/css/index');
+  @import url('../assets/css/index');
 </style>

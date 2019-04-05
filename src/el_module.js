@@ -9,11 +9,13 @@ import {
   Tabs,
   TabPane,
   Row,
-  Col
+  Col,
+  Loading
 } from 'element-ui'
 const element = {
   install: function (Vue) {
     // Vue.use(Message)
+    Vue.use(Loading.directive);
     Vue.use(Carousel)
     Vue.use(CarouselItem)
     Vue.use(Table)
@@ -24,5 +26,9 @@ const element = {
     Vue.use(Col)
   }
 }
+
+
+Vue.prototype.$loading = Loading.service;
+Vue.prototype.$message = Message;
 Vue.prototype.$message = Message;
 export default element

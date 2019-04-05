@@ -44,7 +44,7 @@
         </div>
 
       </div> -->
-      <videoCon :videoSrc="videoSrc" :isMob="!0"></videoCon>
+      <videoCon :videoSrc="videoSrc" v-if="videoSrc" :isMob="!0"></videoCon>
 
       <div data-v-3073f131="" class="info2">
         <div data-v-3073f131=""  class="liveshow">
@@ -56,7 +56,7 @@
           <a data-v-3073f131="" href="https://mp.weixin.qq.com/s/CIIPRUxkFpKl9gQS01ldBQ" target="_blank" class="toLive">球迷群</a>
           <a data-v-3073f131="" href="http://www.yabet1567.com/" target="_blank" class="toLive">安全购彩</a> -->
           </div></div>
-      <bannerCon :bannerList="bannerList" :isMob='isMob'></bannerCon>
+      <bannerCon :bannerList="bannerList" v-if="bannerList.length>0" :isMob='isMob'></bannerCon>
   </div>
 </template>
 

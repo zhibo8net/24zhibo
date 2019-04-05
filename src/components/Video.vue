@@ -48,8 +48,8 @@ export default {
                 live: true,
                 width: 16,
                 height: 9,
-                // video: this.videoSrc //视频地址
-                video:'http://liveplay.oadql.cn/live/stream2235381.m3u8'
+                video: this.videoSrc //视频地址
+                // video:'http://liveplay.oadql.cn/live/stream2235381.m3u8'
             };
             var player = new ckplayer(videoObject);
         }

@@ -33,7 +33,7 @@
             <!-- <a href="http://www.yabet1567.com/" target="_blank" class="toLive">安全购彩</a> -->
             </div>
       </div>
-      <videoCon :videoSrc="videoSrc"></videoCon>
+      <videoCon :videoSrc="videoSrc" v-if="videoSrc"></videoCon>
       <!---->
       <div style="margin: 0px auto; width: 780px;">
         <a href="https://mp.weixin.qq.com/s/MHtt2ziXwbc7D4ybth8oZQ" target="_blank">

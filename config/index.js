@@ -15,7 +15,7 @@ module.exports = {
           '/api/*/*',
           '/api/*/*/*'
         ],
-        target: 'http://80zhibo.com/',
+        target: 'https://80zhibo.com/',
         changeOrigin: true,
         secure: false
       }

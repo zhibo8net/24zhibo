@@ -22,5 +22,10 @@
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
   }
-
+  .el-loading-mask{
+    position: fixed !important;
+  }
+  a[title='站长统计']{
+  display: none;
+}
 </style>
