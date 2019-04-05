@@ -1,14 +1,13 @@
 import axios from 'axios';
 import qs from 'qs';
-// import store from '@/store';
-// import { popToRoot } from 'util/ios';
-// import { getStorage } from 'util/storage';
+
 const status = {
   SUCCESS: 200,
   NO_CHANGE: 304,
   NET_ERR: 404,
   SERVER_ERR: 500 // 网络连接异常，请稍候再试
 };
+const baseURL = window.location.href.indexOf('https://')>-1?'https://80zhibo.com/':'http://80zhibo.com'
 
 function successState(res) {
   if (res.status === status.SUCCESS || res.status === status.NO_CHANGE) {
@@ -36,7 +35,7 @@ function errorState(error) {
 function fetch(options, showLoading = 0, noloading = 0) {
   return new Promise((resolve, reject) => {
     let instance = axios.create({
-      baseURL: 'http://80zhibo.com/',
+      baseURL: baseURL,
       responseType: 'json',
       // withCredentials: true,
       timeout: 10000,
