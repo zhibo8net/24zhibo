@@ -19,20 +19,6 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(el_module);
 
-!(function(win) {
-  win.addEventListener(
-    'resize',
-    function() {
-      let isMob = /Android|webOS|iPhone|iPod|BlackBerry/i.test(
-        navigator.userAgent
-      );
-      if (isMob) {
-        window.location.reload()
-      }
-    },
-    false
-  );
-})(window);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

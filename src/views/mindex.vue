@@ -1,5 +1,10 @@
 <template>
-  <div class="index" v-loading="loading">
+  <div class="index"
+    v-loading="loading"
+    element-loading-text="拼命加载中"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(255, 255, 255, 0.6)"
+  >
     <div class="m_nav">
       <headerCon :isIndex='2'></headerCon>
     </div>
@@ -7,8 +12,7 @@
       <el-tab-pane v-for="(item,i) in configData.nameList" :key="i" :label="item.name" :name="String(i)">
       </el-tab-pane>
     </el-tabs>
-    <div class="contentList mcontentList" v-for="(matchs,index) in macthList" :key="index"
-          v-if="matchs.matches.length>0">
+    <div class="contentList mcontentList" v-for="(matchs,index) in macthList" :key="index" v-if="macthList.length>0">
           <div class="contentTop">{{matchs.dateStr}}</div>
           <router-link tag="div" class="contentBody" v-for="(match,ids) in matchs.matches" :key="ids" :to="{path:'/mlive',query:{'matchID':match.id}}">
             <div class="contentLeft">
@@ -25,8 +29,10 @@
             </div>
           </router-link>
         </div>
-    <!-- <matchsCon></matchsCon>
-    <footerCon :isIndex="1"></footerCon> -->
+        <div class="nodata" v-if="macthList.length==0">
+            <i class="el-icon-warning"></i>
+            <span>暂无数据</span>
+        </div>
   </div>
 </template>
 
@@ -43,7 +49,7 @@
         activeName: '0',
         macthList:[],
         nameList:[],
-        loading:false
+        loading:true
       }
     },
     mounted() {
@@ -60,18 +66,20 @@
         this.loading = !0;
       },
       getMatch(name){
-        this.macthList = [];
         this.api.getMatchList({
           game:name
         }).then((resp)=>{
         if(resp.status == 200){
           // this.deleteAllChoose = true;
-          this.macthList = resp.data;
+          let arr = [];
+          resp.data.map((data)=>{
+              if(data.matches.length>0){
+                  arr.push(data);
+              }
+          });
+          this.macthList = arr;
           this.loading =false;
-          // this.bakListData = JSON.stringify(resp.data);
-          // this.$nextTick(()=>{
-          //   this.deleteAllChoose = false;
-          // })
+
         }
       })
       .catch((er)=>{
@@ -85,5 +93,18 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-  @import url('../assets/css/index');
+    @import url('../assets/css/index');
 </style>
+<style scoped>
+    .index {
+        height: 100%;
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+    .nodata{
+        padding-top: 5rem;
+        color:#999;
+        font-size: 1.2rem;
+    }
+</style>
+

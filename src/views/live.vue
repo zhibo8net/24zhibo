@@ -26,14 +26,17 @@
       </div>
       <div class="info2">
         <div class="liveshow">
-          <a v-for="(item,i) in matchDeatil.lives" :key="i" href="javascript:;" v-if="matchDeatil.lives&&matchDeatil.lives.length>0"
-            class="toLive" :class="{'picked':matchDeatil.lives.length==1}">信号{{i+1}}</a>
-          <a v-for="(item,i) in bannerList" :key="i" :href="item.link" target="_blank" v-if="item.adKey=='LIVE-TOP'"
+          <span v-for="(item,i) in matchDeatil.lives" :key="i" >
+            <a v-for="(signal,index) in item.signals" :key="index" href="javascript:;"
+            class="toLive" @click="chooseSignal(signal.link,i,index)" :class="{'picked':chooseSingalData.f==i&&chooseSingalData.m==index}">{{signal.indexName}}</a>
+          </span>
+          <a v-for="(item,i) in bannerList" :key="i" :href="item.link" target="_blank"
             class="toLive">{{item.message}}</a>
             <!-- <a href="http://www.yabet1567.com/" target="_blank" class="toLive">安全购彩</a> -->
             </div>
       </div>
       <videoCon :videoSrc="videoSrc" v-if="videoSrc"></videoCon>
+      <div class="defaultCon" v-else></div>
       <!---->
       <div style="margin: 0px auto; width: 780px;">
         <a href="https://mp.weixin.qq.com/s/MHtt2ziXwbc7D4ybth8oZQ" target="_blank">
@@ -60,21 +63,42 @@
     data() {
       return {
         matchID:'',
-        matchDeatil:{},
+        matchDeatil:{
+          lives:[]
+        },
         bannerList:[],
-        videoSrc:''
+        videoSrc:'',
+        chooseSingalData:{
+            f:0,
+            m:0
+        }
       }
     },
     methods:{
       init(){
         this.api.getBanner().then((resp)=>{
-        if(resp.status == 200){
-          this.bannerList = resp.data;
-        }
-      })
-      .catch((er)=>{
-        console.log(er)
-      })
+          if(resp.status == 200){
+            let arr = [];
+            resp.data.map((data)=>{
+              if(data.adKey=='LIVE-TOP'){
+                arr.push(data);
+              }
+            });
+            this.bannerList = arr;s
+          }
+        })
+        .catch((er)=>{
+          console.log(er)
+        })
+      },
+      chooseSignal(signal,topIndex,signalIndex){
+          console.log(signal)
+          this.chooseSingalData = {
+              f:topIndex,
+              m:signalIndex
+          }
+          this.videoSrc = signal;
+        //   this.videoSrc = 'http://liveplay.oadql.cn/live/stream2237211.m3u8';
       }
     },
     mounted(){
@@ -95,5 +119,5 @@
 
 </script>
 <style lang="css">
-  @import url('../assets/css/index');
+    @import url('../assets/css/index');
 </style>

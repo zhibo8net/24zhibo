@@ -13,7 +13,8 @@
       <el-carousel-item>
         <h3>
           <a href="" target="_blank">
-            <img src="../assets/img/banner.jpg" alt="">
+            <img src="../assets/img/banner.jpg" alt="" v-if="!isMob">
+            <img src="../assets/img/mbanner.jpg" alt="" v-else>
           </a></h3>
       </el-carousel-item>
     </el-carousel>
