@@ -5,7 +5,8 @@
         </div>
         <div :data-v-3073f131="isMob" id="video" class="video">
             <div class="ckplayerchcibnbibhcozinnmu" style="background-color: rgb(0, 0, 0); width: 100%; height: 100%;">
-                <video v-if="isMob" id="chffxprftxrxnebrer" :src="videoSrc" width="100%" height="100%" autoplay="autoplay"  x5-playsinline="" playsinline="true" webkit-playsinline="true" style="width: 100%; height: 100%; background-color: rgb(0, 0, 0);"></video>
+                <!-- <video v-if="isMob" id="chffxprftxrxnebrer" :src="videoSrc" width="100%" height="100%" autoplay="autoplay"  x5-playsinline="" playsinline="true" webkit-playsinline="true" style="width: 100%; height: 100%; background-color: rgb(0, 0, 0);"></video> -->
+                <!-- <video webkit-playsinline="" playsinline="" x-webkit-airplay="" preload="preload" autoplay="autoplay" :src="videoSrc" style="width: 100%; height: 100%;"></video> -->
             </div>
         </div>
         <p v-show="false">{{videoSrc}}</p>
@@ -40,14 +41,13 @@ export default {
     },
     methods:{
         initPlay(){
-            this.videoObject.video = this.videoSrc //视频地址
+            this.videoObject.video = this.videoSrc.replace(/(^\s*)|(\s*$)/g, ""); //视频地址
+            // this.videoObject.video = 'http://liveplay.oadql.cn/live/streamcnhd12135.m3u8'
             var player = new ckplayer(this.videoObject);
         }
     },
     mounted(){
-        if(!this.isMob){
-            this.initPlay();
-        }
+        this.initPlay();
     },
     watch:{
         videoSrc(now,old){

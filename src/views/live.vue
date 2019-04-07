@@ -39,7 +39,7 @@
       <div class="defaultCon" v-else></div>
       <!---->
       <div style="margin: 0px auto; width: 780px;">
-        <a href="https://mp.weixin.qq.com/s/MHtt2ziXwbc7D4ybth8oZQ" target="_blank">
+        <a href="javascript:;" target="_blank">
           <img width="780px" height="80px"
             src="../assets/img/img1.jpg" alt=""
             style="margin-top: 10px;">
