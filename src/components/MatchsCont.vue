@@ -7,6 +7,14 @@
             <ul>
               <li v-for="(item,index) in nameList" :class="{'on':index == nowChoose}" :key="index" @click="filterMatch(index)" v-if="item.id.indexOf(type)>-1">{{item.name}}</li>
             </ul>
+            <div>
+              <img src="../assets/img/weixin.jpg" alt="">
+              <p>关注公众号80爱看球</p>
+            </div>
+            <div>
+              <img src="../assets/img/down.png" alt="">
+              <p>扫码下载80直播APP(安卓版)</p>
+            </div>
           </div>
         </div>
       </el-col>
@@ -113,5 +121,12 @@
   }
 
 </script>
-<style lang="scss" scoped>
+<style scoped>
+.contentListLeft div{
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.contentListLeft img{
+    width: 100%;
+  }
 </style>

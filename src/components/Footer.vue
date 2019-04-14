@@ -15,8 +15,8 @@
       </div>
       <div class="foot_global">
         <p>80直播网所有视频数据均调用第三方资源，不提供任何视听上传服务，如有版权问题请联系我们。</p>
-        <p>微信客服：zuqiu955 </p>
-        <p>Copyright @ 2018 80直播网</p>
+        <p>QQ客服 5583670</p>
+        <p>Copyright @ 2019 80直播网</p>
       </div>
     </div>
   </div>
