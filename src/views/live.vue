@@ -84,7 +84,7 @@
                 arr.push(data);
               }
             });
-            this.bannerList = arr;s
+            this.bannerList = arr;
           }
         })
         .catch((er)=>{
@@ -93,11 +93,14 @@
       },
       chooseSignal(signal,topIndex,signalIndex){
           console.log(signal)
+          this.videoSrc = '';
           this.chooseSingalData = {
               f:topIndex,
               m:signalIndex
           }
-          this.videoSrc = signal;
+          this.$nextTick(()=>{
+            this.videoSrc = signal;
+          })
         //   this.videoSrc = 'http://liveplay.oadql.cn/live/stream2237211.m3u8';
       }
     },
