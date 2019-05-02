@@ -11,6 +11,7 @@
             </video>
         </div>
         <p v-show="false">{{videoSrc}}</p>
+		<p @click="gohttp">http与https互转</p>
     </div>
 </template>
 <script>
@@ -126,16 +127,25 @@ export default {
         }
     },
     methods:{
+		gohttp(){
+			let href = window.location.href;
+			if(href.indexOf('https')>-1){
+				href = 'http'+ href.split('https')[1]
+			}else{
+				href = 'https'+ href.split('http')[1]
+			}
+			window.location.href = href ;
+		},
         initPlay(src){
-            this.videoObject.video = src || this.videoSrc.replace(/(^\s*)|(\s*$)/g, ""); //视频地址
-            var player = new ckplayer(this.videoObject);
-            // videojs.addLanguage('zh-CN',this.languageData);
-            // this.player = videojs('my-video');
-			// videojs("my-video").ready(function(){
-            //     var myPlayer = this;
-            //     console.log(this)
-			// 	myPlayer.play();
-			// });
+            // this.videoObject.video = src || this.videoSrc.replace(/(^\s*)|(\s*$)/g, ""); //视频地址
+            // var player = new ckplayer(this.videoObject);
+            videojs.addLanguage('zh-CN',this.languageData);
+            this.player = videojs('my-video');
+			videojs("my-video").ready(function(){
+                var myPlayer = this;
+                console.log(this)
+				myPlayer.play();
+			});
         }
     },
     mounted(){
@@ -149,25 +159,27 @@ export default {
 }
 </script>
 <style>
-    .my-video-dimensions {
-        width: 100%;
-        height: 100%;
-    }
-    .video-js .vjs-big-play-button {
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        margin: auto;
-
-    }
-    .video-js .vjs-big-play-button .vjs-icon-placeholder:before, .video-js .vjs-modal-dialog, .vjs-button>.vjs-icon-placeholder:before, .vjs-modal-dialog .vjs-modal-dialog-content{
-        line-height: 1.4;
-    }
-    video {
-        width: 100% !important;
-        height: 100% !important;
-        background-color: rgb(0, 0, 0);
-    }
+	.my-video-dimensions {
+	    width: 100%;
+	    height: 100%;
+	}
+	.video-js .vjs-big-play-button {
+	    left: 0;
+	    top: 0;
+	    right: 0;
+	    bottom: 0;
+	    margin: auto;
+	}
+	.video-js .vjs-big-play-button .vjs-icon-placeholder:before,
+	.video-js .vjs-modal-dialog,
+	.vjs-button > .vjs-icon-placeholder:before,
+	.vjs-modal-dialog .vjs-modal-dialog-content {
+	    line-height: 1.4;
+	}
+	video {
+	    width: 100% !important;
+	    height: 100% !important;
+	    background-color: rgb(0, 0, 0);
+	}
 </style>
 

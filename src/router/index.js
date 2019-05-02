@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/views/index'
 import live from '@/views/live'
+import live1 from '@/views/live1'
 import mindex from '@/views/mindex'
 import mlive from '@/views/mlive'
 
@@ -18,6 +19,11 @@ const router = new Router({
       path: '/live',
       name: 'live',
       component: live
+    },
+    {
+      path: '/live1',
+      name: 'live1',
+      component: live1
     },
     {
       path: '/mindex',
