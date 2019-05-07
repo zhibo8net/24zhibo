@@ -28,7 +28,9 @@
       </div>
     </div>
       <videoCon :videoSrc="videoSrc" v-if="videoSrc" :isMob="!0"></videoCon>
-      <div class="mDefaultCon" v-else></div>
+      <div class="mDefaultCon" v-else>
+        <img src="../assets/img/play.png" alt="">
+      </div>
 
       <div data-v-3073f131="" class="info2">
         <div data-v-3073f131=""  class="liveshow">

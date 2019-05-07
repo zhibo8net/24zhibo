@@ -10,8 +10,7 @@
         <a href="index.html" class="back"></a>
         <div class="infoWrap">
           <div class="list1">
-            <img :src="configData.baseUrl+matchDeatil.masterTeamLink"
-              class="first homeTeam_img">
+            <img :src="configData.baseUrl+matchDeatil.masterTeamLink" class="first homeTeam_img">
             <span class="name1 homeTeam">{{matchDeatil.masterTeamName}}</span>
           </div>
           <div class="list2">
@@ -26,23 +25,24 @@
       </div>
       <div class="info2">
         <div class="liveshow">
-          <span v-for="(item,i) in matchDeatil.lives" :key="i" >
-            <a v-for="(signal,index) in item.signals" :key="index" href="javascript:;"
-            class="toLive" @click="chooseSignal(signal.link,i,index)" :class="{'picked':chooseSingalData.f==i&&chooseSingalData.m==index}">{{signal.indexName}}</a>
+          <span v-for="(item,i) in matchDeatil.lives" :key="i">
+            <a v-for="(signal,index) in item.signals" :key="index" href="javascript:;" class="toLive"
+              @click="chooseSignal(signal.link,i,index)"
+              :class="{'picked':chooseSingalData.f==i&&chooseSingalData.m==index}">{{signal.indexName}}</a>
           </span>
           <a v-for="(item,i) in bannerList" :key="i" :href="item.link" target="_blank"
             class="toLive">{{item.message}}</a>
-            <!-- <a href="http://www.yabet1567.com/" target="_blank" class="toLive">安全购彩</a> -->
-            </div>
+          <!-- <a href="http://www.yabet1567.com/" target="_blank" class="toLive">安全购彩</a> -->
+        </div>
       </div>
       <videoCon :videoSrc="videoSrc" v-if="videoSrc"></videoCon>
-      <div class="defaultCon" v-else></div>
+      <div class="defaultCon" v-else>
+        <img src="../assets/img/play.png" alt="">
+      </div>
       <!---->
       <div style="margin: 0px auto; width: 780px;">
         <a href="javascript:;" target="_blank">
-          <img width="780px" height="80px"
-            src="../assets/img/img1.jpg" alt=""
-            style="margin-top: 10px;">
+          <img width="780px" height="80px" src="../assets/img/img1.jpg" alt="" style="margin-top: 10px;">
         </a>
       </div>
     </div>
@@ -62,65 +62,68 @@
     },
     data() {
       return {
-        matchID:'',
-        matchDeatil:{
-          lives:[]
+        matchID: '',
+        matchDeatil: {
+          lives: []
         },
-        bannerList:[],
-        videoSrc:'',
-        chooseSingalData:{
-            f:0,
-            m:0
+        bannerList: [],
+        videoSrc: '',
+        chooseSingalData: {
+          f: 0,
+          m: 0
         }
       }
     },
-    methods:{
-      init(){
-        this.api.getBanner().then((resp)=>{
-          if(resp.status == 200){
-            let arr = [];
-            resp.data.map((data)=>{
-              if(data.adKey=='LIVE-TOP'){
-                arr.push(data);
-              }
-            });
-            this.bannerList = arr;
-          }
-        })
-        .catch((er)=>{
-          console.log(er)
-        })
-      },
-      chooseSignal(signal,topIndex,signalIndex){
-          console.log(signal)
-          this.videoSrc = '';
-          this.chooseSingalData = {
-              f:topIndex,
-              m:signalIndex
-          }
-          this.$nextTick(()=>{
-            this.videoSrc = signal;
+    methods: {
+      init() {
+        this.api.getBanner().then((resp) => {
+            if (resp.status == 200) {
+              let arr = [];
+              resp.data.map((data) => {
+                if (data.adKey == 'LIVE-TOP') {
+                  arr.push(data);
+                }
+              });
+              this.bannerList = arr;
+            }
           })
+          .catch((er) => {
+            console.log(er)
+          })
+      },
+      chooseSignal(signal, topIndex, signalIndex) {
+        console.log(signal)
+        this.videoSrc = '';
+        this.chooseSingalData = {
+          f: topIndex,
+          m: signalIndex
+        }
+        this.$nextTick(() => {
+          this.videoSrc = signal;
+        })
         //   this.videoSrc = 'http://liveplay.oadql.cn/live/stream2237211.m3u8';
       }
     },
-    mounted(){
+    mounted() {
       this.matchID = this.$route.query.matchID;
-      this.api.getMatchDetail({id:this.matchID}).then((resp)=>{
-        console.log(resp.data)
-        if(resp.status == 200){
-          this.matchDeatil = resp.data;
-          this.videoSrc = this.matchDeatil.lives[0].link;
-        }
-      })
-      .catch((er)=>{
-        console.log(er)
-      })
+      this.api.getMatchDetail({
+          id: this.matchID
+        }).then((resp) => {
+          console.log(resp.data)
+          if (resp.status == 200) {
+            this.matchDeatil = resp.data;
+            this.videoSrc = this.matchDeatil.lives[0].link;
+          }
+        })
+        .catch((er) => {
+          console.log(er)
+        })
       this.init();
     }
   }
 
 </script>
 <style lang="css">
-    @import url('../assets/css/index');
+  @import url('../assets/css/index');
+
 </style>
