@@ -11,10 +11,10 @@
               <img src="../assets/img/weixin.jpg" alt="">
               <p>关注公众号80爱看球</p>
             </div>
-            <div>
+            <!-- <div>
               <img src="../assets/img/down.jpg" alt="">
               <p>扫码下载80直播APP(安卓版)</p>
-            </div>
+            </div> -->
           </div>
         </div>
       </el-col>
